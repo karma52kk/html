@@ -1,3 +1,6 @@
 вступ до html 
+
 git config --global user.name "dns_006"
 git config --global user.email "karma527252@gmail.com"
+
+HTML - HyperText Markup Language - Гіпертекстова мова розмітки
