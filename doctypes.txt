@@ -1,0 +1,90 @@
+ТИПИ (ВЕРСІЇ) HTML ТА ДЕКЛАРАЦІЯ <!DOCTYPE>
+==================================================
+
+1. Що таке <!DOCTYPE>?
+
+<!DOCTYPE> — це декларація типу документа, а не HTML-тег.
+Її розміщують на початку HTML-файлу, перед елементом <html>.
+
+У старих версіях HTML вона вказувала на певний стандарт і визначення
+типу документа (DTD). У сучасному HTML декларація допомагає браузеру
+використовувати стандартний режим відображення сторінки.
+
+2. Основні версії та різновиди DOCTYPE
+
+HTML 2.0 (1995)
+Один із перших офіційних стандартів HTML; базові елементи сторінки.
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+
+HTML 3.2 (1997)
+Додано можливості для таблиць, скриптів та оформлення сторінок.
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+HTML 4.01 Strict (1999)
+Суворий варіант HTML 4.01: не дозволяє застарілі елементи оформлення
+та фреймові набори. Оформлення рекомендовано робити через CSS.
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+HTML 4.01 Transitional (1999)
+Перехідний варіант: дозволяє деякі застарілі елементи й атрибути.
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+HTML 4.01 Frameset (1999)
+Варіант для сторінок із фреймовими наборами (frameset); нині застарілий.
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+
+XHTML 1.0 Strict (2000)
+HTML-подібна розмітка за суворішими правилами XML.
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+XHTML 1.0 Transitional (2000)
+Перехідний різновид XHTML 1.0 з підтримкою частини застарілої розмітки.
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+XHTML 1.0 Frameset (2000)
+Різновид XHTML 1.0 для документів із фреймовими наборами.
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+
+XHTML 1.1 (2001)
+Більш модульний розвиток XHTML із правилами XML.
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+HTML5 / сучасний HTML
+Спрощена декларація без посилання на DTD і без номера версії.
+Її використовують у сучасних HTML-документах.
+<!DOCTYPE html>
+
+3. Пояснення позначень
+
+DOCTYPE — Document Type Declaration (декларація типу документа).
+PUBLIC — публічний ідентифікатор визначення типу документа.
+DTD — Document Type Definition (визначення типу документа).
+Strict — суворі правила розмітки.
+Transitional — перехідний варіант із підтримкою старої розмітки.
+Frameset — варіант для наборів фреймів.
+XHTML — HTML, сформульований із використанням правил XML.
+
+4. Висновок
+
+У різні роки HTML мав різні декларації DOCTYPE. Старі стандарти
+використовували довгі записи із зазначенням версії та DTD.
+Для нових вебсторінок рекомендовано <!DOCTYPE html>.
+Важливо: сучасний запис не містить номера 5 і не означає, що
+всі старі елементи HTML автоматично стають допустимими.
+
+5. Джерела
+
+MDN Web Docs — Basic HTML syntax:
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax
+
+W3C — Doctypes and markup styles:
+https://www.w3.org/wiki/Doctypes_and_markup_styles
+
+W3C — HTML 3.2 Reference Specification:
+https://www.w3.org/TR/REC-html32
+
+IETF — RFC 1866, Hypertext Markup Language 2.0:
+https://datatracker.ietf.org/doc/html/rfc1866
+
+W3C — HTML 4.01 Specification:
+https://www.w3.org/TR/html401/struct/global.html
