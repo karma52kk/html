@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Інтерактивна сторінка про шістнадцяткову систему числення та кольори RGB у HTML і CSS.">
+  <meta name="theme-color" content="#090c18">
+  <title>HEX & RGB — Як працює код кольору</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080b16;--surface:#111629;--surface2:#151b31;--line:rgba(194,199,255,.13);--text:#f5f6ff;--muted:#a5abc6;--accent:#b695ff;--pink:#fb85d0;--cyan:#7be9f2;--shadow:0 24px 80px rgba(0,0,0,.3)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--text);background:var(--bg);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 45% 32% at 8% 4%,rgba(124,76,255,.15),transparent 90%),radial-gradient(ellipse 45% 35% at 95% 18%,rgba(228,61,178,.11),transparent 80%),linear-gradient(180deg,#0b0d1b,var(--bg) 70%)}
+    body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
+    a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+    .wrap{width:min(1160px,calc(100% - 40px));margin-inline:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(8,11,22,.83);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .topbar .wrap{height:72px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .logo{display:flex;align-items:center;gap:12px;white-space:nowrap;font-weight:900;letter-spacing:.03em}
+    .logo-mark{width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#b68dff,#df73ca);color:#170d2c;font-size:20px;box-shadow:0 8px 25px rgba(182,141,255,.15)}
+    .logo b{color:var(--pink)}
+    nav{display:flex;align-items:center;gap:30px;font-size:13px;color:#bdc0d8;font-weight:650}
+    nav a{transition:color .2s}nav a:hover{color:white}
+    .top-pill,.eyebrow,.section-kicker,.pill{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    .top-pill{color:var(--cyan);border:1px solid rgba(123,233,242,.28);background:rgba(123,233,242,.07);padding:9px 12px;border-radius:999px;white-space:nowrap}
+    .hero{padding:96px 0 91px;display:grid;grid-template-columns:1.03fr .97fr;gap:48px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:11px;color:var(--pink)}.eyebrow::before{content:"";display:block;width:22px;height:2px;background:var(--pink)}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-size:clamp(43px,5.7vw,76px);line-height:1.075;letter-spacing:-.065em;margin:21px 0 22px;font-weight:850}
+    h1 em{font-style:normal;background:linear-gradient(100deg,#b49aff 5%,#f58ecb 93%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{color:var(--muted);font-size:17px;max-width:510px;margin-bottom:32px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{appearance:none;border:1px solid rgba(255,255,255,.15);color:white;border-radius:12px;padding:13px 20px;font-weight:760;line-height:1.3;background:rgba(255,255,255,.06);display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:transform .2s,background .2s,border-color .2s}
+    .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.35)}
+    .btn-primary{background:linear-gradient(110deg,#a887ff,#dd8de0);color:#190d2a;border:0;box-shadow:0 10px 28px rgba(180,118,255,.22)}.btn-primary:hover{background:linear-gradient(110deg,#bba1ff,#eaa7e4)}
+    .hero-display{position:relative;min-height:390px;border:1px solid rgba(190,154,252,.22);border-radius:28px;background:linear-gradient(145deg,rgba(26,32,58,.9),rgba(15,16,31,.92));box-shadow:var(--shadow);padding:24px;overflow:hidden;isolation:isolate}
+    .hero-display::before{content:"";position:absolute;inset:-35%;background:radial-gradient(circle at 56% 48%,rgba(146,93,255,.35),transparent 34%),radial-gradient(circle at 35% 70%,rgba(247,91,184,.21),transparent 30%);filter:blur(18px);z-index:-1;animation:drift 8s ease-in-out infinite alternate}
+    .window-top{display:flex;gap:7px;align-items:center;color:#bcc1dd;font-size:12px;font-weight:700}
+    .dot{width:9px;height:9px;background:#fa7da3;border-radius:50%}.dot:nth-child(2){background:#ffd385}.dot:nth-child(3){background:#6ed9bd}
+    .window-top span:last-child{margin-left:auto;letter-spacing:.14em;color:#aab1ce}
+    .visual-orb{height:220px;display:grid;place-items:center;position:relative}
+    .orb{width:192px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 28% 25%,#ffb4df 0%,#ad76ff 32%,#663ce0 65%,#2e2a86 100%);box-shadow:0 0 65px rgba(159,104,255,.38),inset -18px -25px 50px rgba(9,11,25,.5),inset 10px 10px 38px rgba(255,255,255,.16);animation:float 5s ease-in-out infinite}
+    .orbit{position:absolute;width:260px;height:95px;border:1px solid rgba(230,197,255,.35);border-radius:50%;transform:rotate(-25deg);box-shadow:0 0 20px rgba(255,255,255,.06)}
+    .preview-hex{text-align:center;font-size:clamp(31px,4vw,43px);font-weight:900;letter-spacing:.09em;margin:-4px 0 12px}
+    .channel-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.channel-row span{font-size:12px;font-weight:800;padding:6px 11px;border:1px solid rgba(255,255,255,.18);background:rgba(8,10,20,.43);border-radius:8px}.channel-row b{opacity:.95}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:90px}
+    .stat{border:1px solid var(--line);border-radius:15px;padding:18px 24px;background:rgba(255,255,255,.025);display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .stat strong{font-size:24px;letter-spacing:-.05em}.stat span{font-size:12px;color:var(--muted);max-width:108px;line-height:1.4}
+    section{scroll-margin-top:100px}.section-head{margin-bottom:27px}.section-kicker{color:var(--pink);margin-bottom:10px}
+    h2{font-size:clamp(30px,4vw,42px);line-height:1.16;letter-spacing:-.045em;margin-bottom:10px}
+    .section-subtitle{color:var(--muted);margin:0;max-width:740px;font-size:15px}
+    .grid-2{display:grid;grid-template-columns:1.12fr .88fr;gap:20px}
+    .panel{background:linear-gradient(160deg,rgba(24,28,51,.94),rgba(15,19,36,.95));border:1px solid var(--line);border-radius:23px;padding:27px;box-shadow:0 12px 44px rgba(0,0,0,.12)}
+    .panel h3{font-size:20px;letter-spacing:-.025em;margin-bottom:10px}
+    .panel p{color:#b3b8d0;font-size:14px}
+    .digits{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;margin:25px 0 17px}
+    .digit{height:48px;border-radius:10px;border:1px solid rgba(182,149,255,.2);background:rgba(182,149,255,.075);display:grid;place-items:center;font-size:17px;font-weight:850;color:#d8c7ff}
+    .digit:nth-child(n+11){background:rgba(244,121,201,.1);color:#ffb0de;border-color:rgba(244,121,201,.2)}
+    .hint{background:rgba(126,233,242,.055);border-left:3px solid var(--cyan);border-radius:0 12px 12px 0;padding:11px 14px;color:#c9e7ea;font-size:13px;line-height:1.7}
+    .math-card{margin-top:20px;background:rgba(6,10,25,.5);border:1px solid rgba(255,255,255,.075);border-radius:14px;padding:19px}
+    .math-card .label{color:#9ea8c7;font-size:12px;font-weight:700;margin-bottom:6px}
+    .math-card .math{font-size:21px;font-weight:850;letter-spacing:.01em}.math strong{color:var(--pink)}
+    .converter-inputs{display:flex;gap:15px;align-items:end;margin-top:23px;flex-wrap:wrap}
+    .input-wrap{display:flex;flex-direction:column;gap:7px;flex:1;min-width:145px}.input-wrap label{font-size:12px;color:#a9afca;font-weight:750}
+    input[type=number],input[type=text]{border:1px solid rgba(204,209,255,.2);outline:none;background:#0b1022;color:#fff;border-radius:12px;padding:12px 14px;width:100%;font-size:16px;font-weight:800}
+    input[type=number]:focus,input[type=text]:focus{border-color:#b59aff;box-shadow:0 0 0 3px rgba(181,154,255,.12)}
+    .to-arrow{color:var(--pink);font-weight:900;padding-bottom:14px}
+    .conversion-detail{margin-top:16px;color:#b7c0d8;font-size:13px;line-height:1.6}
+    .conversion-detail strong{color:#f9d0ed}
+    #rgb{margin-top:95px}.rgb-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .code-diagram{display:flex;align-items:stretch;gap:7px;margin:21px 0 22px;flex-wrap:wrap}
+    .code-part{border-radius:12px;min-width:64px;flex:1;text-align:center;padding:12px 8px;border:1px solid rgba(255,255,255,.12)}
+    .code-part strong{display:block;font-size:clamp(23px,3vw,32px);letter-spacing:.05em}.code-part small{display:block;font-size:12px;font-weight:700;margin-top:3px;color:#aab0ce}
+    .code-part.hash{flex:0 0 52px;background:#0a1021}.code-part.red{background:rgba(255,88,116,.1);border-color:rgba(255,88,116,.28)}.code-part.green{background:rgba(72,217,155,.1);border-color:rgba(72,217,155,.28)}.code-part.blue{background:rgba(97,148,255,.1);border-color:rgba(97,148,255,.28)}
+    .red strong{color:#ff889c}.green strong{color:#83f2bb}.blue strong{color:#95b4ff}
+    .channels{display:grid;gap:11px;margin-top:23px}.channel-info{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:11px 14px;border-radius:12px}
+    .color-dot{width:34px;height:34px;border-radius:9px;flex-shrink:0}.channel-info strong{font-size:14px}.channel-info span{font-size:12px;color:#aeb6ce;margin-left:auto}
+    .rgb-fact{margin-top:17px;font-size:13px;color:#afbad9;line-height:1.7}.rgb-fact strong{color:#fff}
+    #lab{margin-top:98px}.lab-grid{display:grid;grid-template-columns:1fr .96fr;gap:18px}
+    .slider-group{margin-top:21px}.slider-top{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;font-weight:820;margin-bottom:12px}.slider-value{font-variant-numeric:tabular-nums;border:1px solid rgba(255,255,255,.13);border-radius:8px;background:#0b1022;padding:2px 12px;min-width:54px;text-align:center}
+    input[type=range]{display:block;width:100%;height:11px;margin:0;appearance:none;-webkit-appearance:none;background:linear-gradient(to right,#000,#f00);border-radius:99px;cursor:pointer;outline-offset:7px}
+    input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:23px;height:23px;border:4px solid #fff;border-radius:50%;background:#242a42;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+    input[type=range]::-moz-range-thumb{width:16px;height:16px;border:4px solid #fff;border-radius:50%;background:#242a42;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+    .slider-red input{background:linear-gradient(90deg,#180d1a,#ff426c)}.slider-green input{background:linear-gradient(90deg,#091a1b,#4be4a7)}.slider-blue input{background:linear-gradient(90deg,#0e1030,#738fff)}
+    .sliders-footnote{font-size:12px;color:#8e9ab6;margin:24px 0 0}
+    .result-panel{display:flex;flex-direction:column;gap:15px}
+    .big-swatch{height:215px;border-radius:18px;background:#8B5CF6;position:relative;overflow:hidden;transition:background-color .12s}
+    .big-swatch::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 10%,rgba(255,255,255,.28),transparent 55%)}
+    .big-swatch .swatch-tag{position:absolute;left:16px;top:16px;background:rgba(12,12,25,.25);color:white;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);border-radius:30px;font-size:12px;font-weight:700;padding:6px 12px}
+    .big-swatch .swatch-code{position:absolute;right:18px;bottom:15px;font-size:32px;line-height:1.1;font-weight:900;letter-spacing:.03em;text-shadow:0 2px 14px rgba(0,0,0,.26)}
+    .hex-edit-row{display:grid;grid-template-columns:1fr auto;gap:10px}.hex-edit-row .input-wrap{min-width:0}
+    .copy-btn{align-self:end;white-space:nowrap;padding:12px 15px}.copy-btn svg{width:16px;height:16px;flex:none}
+    .validation{min-height:21px;color:#ffa3b8;font-size:12px;margin:-8px 0 0}
+    .presets-head{font-size:12px;font-weight:800;color:#b5bdd7;margin:0 0 8px}.presets{display:flex;gap:11px;flex-wrap:wrap}
+    .preset{width:30px;height:30px;border:3px solid transparent;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.26);transition:transform .18s}.preset:hover{transform:scale(1.15)}.preset[aria-pressed=true]{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+    .result-formula{font-size:13px;color:#c2c8e1;background:rgba(255,255,255,.035);border-radius:11px;padding:13px 14px;line-height:1.8}.result-formula b{color:#fff}
+    #test{margin-top:98px;margin-bottom:90px}.quiz-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.quiz-card{background:linear-gradient(150deg,rgba(25,30,55,.96),rgba(14,19,37,.94));border:1px solid var(--line);border-radius:20px;padding:21px;display:flex;flex-direction:column}
+    .q-num{color:var(--pink);font-size:11px;font-weight:850;letter-spacing:.12em;margin-bottom:11px}.quiz-card h3{font-size:17px;line-height:1.4;min-height:50px;margin:0 0 19px}
+    .options{display:grid;gap:8px}.option{min-height:43px;border:1px solid rgba(255,255,255,.13);background:#11172b;color:#e3e5f5;border-radius:10px;font-weight:750;font-size:14px;text-align:left;padding:10px 13px;transition:background .16s,border-color .16s}
+    .option:hover:not(:disabled){border-color:#ae8ff6;background:#1f2344}.option:disabled{cursor:default;opacity:.67}.option.correct{background:rgba(84,210,149,.12);border-color:#69daa3;color:#b7f9d8;opacity:1}.option.wrong{background:rgba(255,90,120,.1);border-color:#f47b96;color:#ffc5d2;opacity:1}
+    .answer{font-size:12px;color:#b8c7df;min-height:42px;margin:14px 0 0}.quiz-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:18px;padding:17px 22px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.03);flex-wrap:wrap}.quiz-footer p{margin:0;color:#cbd0e7;font-size:14px}.quiz-footer strong{color:var(--cyan)}
+    .btn-small{font-size:13px;padding:9px 14px}
+    footer{border-top:1px solid rgba(255,255,255,.09);padding:26px 0 33px;color:#8895b6;font-size:12px}footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}footer b{color:#bdb4df}
+    @keyframes float{50%{transform:translateY(-11px)}}@keyframes drift{to{transform:translate(8%,5%) rotate(8deg)}}
+    @media(max-width:880px){.hero{grid-template-columns:1fr;padding:63px 0;gap:35px}.hero-display{max-width:570px;width:100%;margin:auto}.stats{margin-bottom:72px}.grid-2,.rgb-layout,.lab-grid{grid-template-columns:1fr}.quiz-grid{grid-template-columns:1fr}.quiz-card h3{min-height:auto}nav{gap:15px}.top-pill{display:none}}
+    @media(max-width:560px){.wrap{width:min(100% - 28px,1160px)}.topbar .wrap{height:62px}.logo{font-size:13px;gap:8px}.logo-mark{width:31px;height:31px}nav{gap:11px;font-size:11px}nav a:first-child{display:none}.hero{padding:51px 0 47px}.lead{font-size:15px}.hero-display{min-height:345px;padding:18px}.visual-orb{height:190px}.orb{width:164px}.orbit{width:223px}.stats{grid-template-columns:1fr;gap:8px;margin-bottom:64px}.stat{padding:13px 18px}.stat span{max-width:none}.panel{padding:20px;border-radius:18px}.digits{gap:5px}.digit{height:39px;font-size:14px}.section-head{margin-bottom:19px}#rgb,#lab,#test{margin-top:73px}.code-part{min-width:43px}.code-part.hash{flex-basis:40px}.code-part small{font-size:10px}.code-part strong{font-size:23px}.channel-info span{font-size:11px}.big-swatch{height:190px}.hex-edit-row{grid-template-columns:1fr}.copy-btn{width:100%}.to-arrow{padding-bottom:12px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+    @media print{body{background:#fff;color:#111;font-size:12px}body::before,body::after,.topbar,.hero-actions,.presets,.copy-btn,.quiz-footer{display:none!important}.wrap{width:100%}.hero,.grid-2,.rgb-layout,.lab-grid,.quiz-grid{display:block}.hero{padding:20px 0}.hero-display{min-height:100px}.orb,.orbit{display:none}.panel,.quiz-card,.stat,.hero-display{break-inside:avoid;box-shadow:none;border:1px solid #aaa;margin:10px 0;background:#fff;color:#111}.panel p,.lead,.section-subtitle,.math-card,.answer{color:#333!important}h1,h2,h3,.label{color:#111!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a href="#top" class="logo" aria-label="Повернутися на початок"><span class="logo-mark">#</span><span>HEX <b>&</b> RGB</span></a>
+      <nav aria-label="Навігація сторінкою">
+        <a href="#hex">Система HEX</a><a href="#rgb">Код RGB</a><a href="#lab">Практика</a><a href="#test">Мінітест</a>
+      </nav>
+      <span class="top-pill">Інтерактивний урок</span>
+    </div>
+  </header>
+  <main id="top" class="wrap">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">HTML / CSS / ОСНОВИ КОЛЬОРУ</span>
+        <h1>Від <em>0 до FF.</em><br>Мова кольорів у вебі.</h1>
+        <p class="lead">Дізнайся, як працює шістнадцяткова система числення, чому кольори записують як <strong style="color:#eac0ff">#RRGGBB</strong> і як створити будь-який відтінок із трьох чисел.</p>
+        <div class="hero-actions"><a href="#hex" class="btn btn-primary">Почати вивчення <span aria-hidden="true">↗</span></a><a href="#lab" class="btn">Відкрити палітру <span aria-hidden="true">→</span></a></div>
+      </div>
+      <div class="hero-display" aria-label="Приклад кольору #8B5CF6 у записі RGB">
+        <div class="window-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>COLOR PREVIEW</span></div>
+        <div class="visual-orb"><div class="orbit"></div><div class="orb"></div></div>
+        <div class="preview-hex">#8B5CF6</div>
+        <div class="channel-row"><span>R <b style="color:#ff94a3">139</b></span><span>G <b style="color:#86e4bb">92</b></span><span>B <b style="color:#99b6ff">246</b></span></div>
+      </div>
+    </div>
+    <div class="stats" aria-label="Короткі факти">
+      <div class="stat"><strong>16</strong><span>символів у системі HEX</span></div>
+      <div class="stat"><strong>3</strong><span>канали кольору RGB</span></div>
+      <div class="stat"><strong>16,7 млн</strong><span>можливих RGB-кольорів</span></div>
+    </div>
+
+    <section id="hex">
+      <div class="section-head"><div class="section-kicker">01 / ОСНОВИ</div><h2>Шістнадцяткова система числення</h2><p class="section-subtitle">Звичайна десяткова система має 10 цифр (0–9). Шістнадцяткова — 16 символів: цифри від 0 до 9 та літери від A до F.</p></div>
+      <div class="grid-2">
+        <article class="panel">
+          <h3>Алфавіт HEX</h3>
+          <p>Після цифри 9 ідуть літери A, B, C, D, E, F. Вони відповідають десятковим числам 10, 11, 12, 13, 14, 15.</p>
+          <div class="digits" aria-label="16 символів HEX"><div class="digit">0</div><div class="digit">1</div><div class="digit">2</div><div class="digit">3</div><div class="digit">4</div><div class="digit">5</div><div class="digit">6</div><div class="digit">7</div><div class="digit">8</div><div class="digit">9</div><div class="digit">A</div><div class="digit">B</div><div class="digit">C</div><div class="digit">D</div><div class="digit">E</div><div class="digit">F</div></div>
+          <div class="hint"><strong>Головне правило:</strong> кожна позиція в числі — це степінь 16. Справа наліво: 16⁰ = 1, 16¹ = 16, 16² = 256 тощо.</div>
+          <div class="math-card"><div class="label">Приклад: переведемо 2F із HEX у десяткову</div><div class="math">2 × 16 + 15 = <strong>47</strong></div></div>
+        </article>
+        <article class="panel">
+          <h3>Спробуй перевести число</h3><p>Введи десяткове число від 0 до 255 — і подивись, як воно перетворюється на дві HEX-цифри.</p>
+          <div class="converter-inputs">
+            <div class="input-wrap"><label for="decimal">Десяткове число (0–255)</label><input id="decimal" type="number" value="139" min="0" max="255" step="1" inputmode="numeric"></div>
+            <div class="to-arrow" aria-hidden="true">→</div>
+            <div class="input-wrap"><label for="hex-result">Шістнадцяткове число</label><input id="hex-result" type="text" value="8B" readonly aria-live="polite"></div>
+          </div>
+          <div class="math-card" aria-live="polite"><div class="label">Розклад числа за розрядами</div><div class="math" id="calculation">8 × 16 + 11 = <strong>139</strong></div></div>
+          <p class="conversion-detail" id="conversion-detail">139 ÷ 16 = 8 (остача 11). У HEX цифра <strong>11</strong> позначається літерою <strong>B</strong>, отже результат — <strong>8B</strong>.</p>
+          <div class="hint">Один двозначний HEX-запис може передати число від <strong>00</strong> (0) до <strong>FF</strong> (255).</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="rgb">
+      <div class="section-head"><div class="section-kicker">02 / КОЛІР У HTML</div><h2>Як утворюється код #RRGGBB?</h2><p class="section-subtitle">RGB — це Red, Green, Blue (червоний, зелений, синій). Комп’ютер змішує ці три світлові канали, щоб отримати потрібний колір.</p></div>
+      <div class="rgb-layout">
+        <article class="panel">
+          <h3>Будова HEX-коду кольору</h3><p>Після символу <strong style="color:white">#</strong> записуємо шість HEX-символів — по два на кожен канал.</p>
+          <div class="code-diagram" aria-label="Приклад розкладу кольору #8B5CF6"><div class="code-part hash"><strong>#</strong><small>початок</small></div><div class="code-part red"><strong>8B</strong><small>Red</small></div><div class="code-part green"><strong>5C</strong><small>Green</small></div><div class="code-part blue"><strong>F6</strong><small>Blue</small></div></div>
+          <div class="math-card"><div class="label">Переведення каналів у десяткові значення</div><div style="font-size:14px;line-height:2.1"><div><strong style="color:#ff889c">8B</strong> = 8 × 16 + 11 = <b>139</b></div><div><strong style="color:#83f2bb">5C</strong> = 5 × 16 + 12 = <b>92</b></div><div><strong style="color:#95b4ff">F6</strong> = 15 × 16 + 6 = <b>246</b></div></div></div>
+          <p class="rgb-fact">Отже, <strong>#8B5CF6</strong> — це те саме, що CSS-запис <strong>rgb(139, 92, 246)</strong>.</p>
+        </article>
+        <article class="panel">
+          <h3>Три складові кольору</h3><p>Кожен канал змінюється від 0 до 255. Нуль означає відсутність цього світла, 255 — його максимальну інтенсивність.</p>
+          <div class="channels"><div class="channel-info"><i class="color-dot" style="background:#ff496b"></i><strong>R — Red / Червоний</strong><span>00 … FF</span></div><div class="channel-info"><i class="color-dot" style="background:#45dba0"></i><strong>G — Green / Зелений</strong><span>00 … FF</span></div><div class="channel-info"><i class="color-dot" style="background:#6796ff"></i><strong>B — Blue / Синій</strong><span>00 … FF</span></div></div>
+          <div class="math-card"><div class="label">Скільки можна створити відтінків?</div><div class="math">256 × 256 × 256</div><div style="color:var(--cyan);font-size:23px;font-weight:850;margin-top:6px">= 16 777 216</div></div>
+          <p class="rgb-fact">Приклади: <strong>#000000</strong> — чорний, <strong>#FFFFFF</strong> — білий, <strong>#FF0000</strong> — чистий червоний, <strong>#00FF00</strong> — чистий зелений.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="lab">
+      <div class="section-head"><div class="section-kicker">03 / ІНТЕРАКТИВНА ПРАКТИКА</div><h2>Створи власний колір</h2><p class="section-subtitle">Рухай повзунки RGB або введи HEX-код. Колір та його числове представлення змінюватимуться миттєво.</p></div>
+      <div class="lab-grid">
+        <article class="panel">
+          <h3>Налаштування каналів</h3><p>Змішуй інтенсивність червоного, зеленого й синього світла.</p>
+          <div class="slider-group slider-red"><div class="slider-top"><label for="red-range" style="color:#ff91a8">R — Червоний</label><output id="red-val" class="slider-value" for="red-range">139</output></div><input type="range" id="red-range" min="0" max="255" value="139"></div>
+          <div class="slider-group slider-green"><div class="slider-top"><label for="green-range" style="color:#7be7b0">G — Зелений</label><output id="green-val" class="slider-value" for="green-range">92</output></div><input type="range" id="green-range" min="0" max="255" value="92"></div>
+          <div class="slider-group slider-blue"><div class="slider-top"><label for="blue-range" style="color:#a8bbff">B — Синій</label><output id="blue-val" class="slider-value" for="blue-range">246</output></div><input type="range" id="blue-range" min="0" max="255" value="246"></div>
+          <p class="sliders-footnote">Підказка: якщо всі канали на 0 — буде чорний. Якщо всі на 255 — білий. Якщо всі канали однакові — отримаєш відтінок сірого.</p>
+        </article>
+        <article class="panel result-panel">
+          <div class="big-swatch" id="swatch"><span class="swatch-tag">Твій колір</span><span class="swatch-code" id="swatch-code">#8B5CF6</span></div>
+          <div class="hex-edit-row"><div class="input-wrap"><label for="hex-input">HEX-код кольору</label><input type="text" id="hex-input" value="#8B5CF6" spellcheck="false" maxlength="7" autocomplete="off" aria-describedby="validation"></div><button type="button" class="btn copy-btn" id="copy" aria-label="Скопіювати HEX-код"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span id="copy-text">Копіювати</span></button></div>
+          <p class="validation" id="validation" aria-live="polite"></p>
+          <div><p class="presets-head">Швидкі кольори</p><div class="presets" aria-label="Готові кольори"><button type="button" class="preset" data-hex="#FF6B8A" style="background:#FF6B8A" aria-label="Рожевий #FF6B8A" aria-pressed="false"></button><button type="button" class="preset" data-hex="#39DAAC" style="background:#39DAAC" aria-label="М'ятний #39DAAC" aria-pressed="false"></button><button type="button" class="preset" data-hex="#438BFF" style="background:#438BFF" aria-label="Синій #438BFF" aria-pressed="false"></button><button type="button" class="preset" data-hex="#8B5CF6" style="background:#8B5CF6" aria-label="Фіолетовий #8B5CF6" aria-pressed="true"></button><button type="button" class="preset" data-hex="#FFFFFF" style="background:#FFFFFF" aria-label="Білий #FFFFFF" aria-pressed="false"></button><button type="button" class="preset" data-hex="#111827" style="background:#111827" aria-label="Темний #111827" aria-pressed="false"></button></div></div>
+          <div class="result-formula" id="formula" aria-live="polite">HEX: <b>#8B5CF6</b><br>CSS: <b>rgb(139, 92, 246)</b></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="test">
+      <div class="section-head"><div class="section-kicker">04 / ЗАКРІПЛЕННЯ</div><h2>Перевір свої знання</h2><p class="section-subtitle">Три короткі запитання, щоб переконатися, що принцип HEX та RGB зрозумілий.</p></div>
+      <div class="quiz-grid">
+        <article class="quiz-card" data-question="0" data-correct="0"><span class="q-num">ПИТАННЯ 01</span><h3>Який HEX-код означає чистий зелений?</h3><div class="options"><button class="option" type="button">#00FF00</button><button class="option" type="button">#FF0000</button><button class="option" type="button">#0000FF</button></div><p class="answer" aria-live="polite"></p></article>
+        <article class="quiz-card" data-question="1" data-correct="2"><span class="q-num">ПИТАННЯ 02</span><h3>Скільки можливих значень має один RGB-канал?</h3><div class="options"><button class="option" type="button">16</button><button class="option" type="button">255</button><button class="option" type="button">256</button></div><p class="answer" aria-live="polite"></p></article>
+        <article class="quiz-card" data-question="2" data-correct="1"><span class="q-num">ПИТАННЯ 03</span><h3>Чому дорівнює FF₁₆ у десятковій системі?</h3><div class="options"><button class="option" type="button">16</button><button class="option" type="button">255</button><button class="option" type="button">256</button></div><p class="answer" aria-live="polite"></p></article>
+      </div>
+      <div class="quiz-footer"><p>Результат: <strong id="score" aria-live="polite">0 із 3</strong> правильних відповідей</p><button class="btn btn-small" id="reset-quiz" type="button">Спробувати ще ↻</button></div>
+    </section>
+  </main>
+  <footer><div class="wrap"><span><b>HEX & RGB</b> — навчальна HTML-сторінка, підготовлена з використанням ШІ.</span><span>HTML · CSS · JavaScript • Один файл, без бібліотек</span></div></footer>
+  <script>
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const hexChars = '0123456789ABCDEF';
+    const toHex = num => Number(num).toString(16).toUpperCase().padStart(2, '0');
+    const hexCode = (r,g,b) => '#' + toHex(r) + toHex(g) + toHex(b);
+    const decimal = $('decimal');
+    function convertDecimal(){
+      const raw = Number(decimal.value);
+      if(decimal.value.trim() === '' || !Number.isInteger(raw) || raw < 0 || raw > 255){
+        $('hex-result').value = '—';
+        $('calculation').textContent = 'Введіть ціле число від 0 до 255';
+        $('conversion-detail').textContent = 'Дозволені тільки цілі числа від 0 до 255.';
+        return;
+      }
+      const high = Math.floor(raw / 16), low = raw % 16;
+      $('hex-result').value = toHex(raw);
+      $('calculation').innerHTML = `${high} × 16 + ${low} = <strong>${raw}</strong>`;
+      $('conversion-detail').innerHTML = `${raw} ÷ 16 = ${high} (остача ${low}). У HEX це символи <strong>${hexChars[high]}</strong> і <strong>${hexChars[low]}</strong>, отже результат — <strong>${toHex(raw)}</strong>.`;
+    }
+    decimal.addEventListener('input',convertDecimal);
+
+    const ranges = [$('red-range'),$('green-range'),$('blue-range')];
+    const outputs = [$('red-val'),$('green-val'),$('blue-val')];
+    const hexInput = $('hex-input');
+    let currentHex = '#8B5CF6';
+    let copyTimer;
+    function setColor(r,g,b){
+      const values = [r,g,b];
+      values.forEach((value,i) => { ranges[i].value = value; outputs[i].value = String(value); outputs[i].textContent = String(value); });
+      currentHex = hexCode(r,g,b);
+      hexInput.value = currentHex;
+      $('swatch-code').textContent = currentHex;
+      $('swatch').style.backgroundColor = currentHex;
+      const luminance = [r,g,b].map(v => {const s=v/255;return s<=0.04045?s/12.92:Math.pow((s+0.055)/1.055,2.4)}).reduce((sum,v,i)=>sum+v*[0.2126,0.7152,0.0722][i],0);
+      $('swatch-code').style.color = luminance > .36 ? '#111827' : '#ffffff';
+      $('formula').innerHTML = `HEX: <b>${currentHex}</b><br>CSS: <b>rgb(${r}, ${g}, ${b})</b>`;
+      $('validation').textContent = '';
+      document.querySelectorAll('.preset').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.hex===currentHex)));
+      $('copy-text').textContent = 'Копіювати';
+    }
+    ranges.forEach(range => range.addEventListener('input',()=>setColor(...ranges.map(input=>Number(input.value)))));
+    hexInput.addEventListener('input',()=>{
+      const value=hexInput.value.trim().toUpperCase();
+      if(/^#?[0-9A-F]{6}$/.test(value)){
+        const s=value.replace('#','');
+        setColor(parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16));
+      }else{
+        $('validation').textContent='Формат: #RRGGBB, наприклад #FF8800.';
+      }
+    });
+    hexInput.addEventListener('blur',()=>{if(!/^#?[0-9a-fA-F]{6}$/.test(hexInput.value.trim())){hexInput.value=currentHex;$('validation').textContent='';}});
+    document.querySelectorAll('.preset').forEach(btn=>btn.addEventListener('click',()=>{
+      const s=btn.dataset.hex.slice(1);
+      setColor(parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16));
+    }));
+    $('copy').addEventListener('click',async()=>{
+      let success = false;
+      try { if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(currentHex);success=true;} } catch(err){}
+      if(!success){
+        const area=document.createElement('textarea');area.value=currentHex;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();
+        try {success=document.execCommand('copy');}catch(err){}area.remove();
+      }
+      $('copy-text').textContent=success?'Скопійовано!':'Не вдалося скопіювати';
+      clearTimeout(copyTimer);copyTimer=setTimeout(()=>$('copy-text').textContent='Копіювати',2300);
+    });
+
+    const explanations=[
+      'Правильно: 00 червоного, FF зеленого і 00 синього.',
+      'Правильно: значення від 0 до 255 включно — це 256 варіантів.',
+      'Правильно: F = 15, тому 15 × 16 + 15 = 255.'
+    ];
+    const wrongExplanations=[
+      'Зелений канал стоїть посередині: #00FF00.',
+      'Порахуємо разом із нулем: 0, 1, ... 255 — це 256 чисел.',
+      'F означає 15. FF = 15 × 16 + 15 = 255.'
+    ];
+    const answers=new Map();
+    function updateScore(){const correct=[...answers.entries()].filter(([question,answer])=>Number(document.querySelector(`[data-question="${question}"]`).dataset.correct)===answer).length;$('score').textContent=`${correct} із 3`;}
+    document.querySelectorAll('.quiz-card').forEach(card=>{
+      const question=Number(card.dataset.question),correct=Number(card.dataset.correct);
+      card.querySelectorAll('.option').forEach((button,index)=>button.addEventListener('click',()=>{
+        if(answers.has(question))return;
+        answers.set(question,index);
+        card.querySelectorAll('.option').forEach((option,i)=>{option.disabled=true;if(i===correct)option.classList.add('correct');if(i===index&&index!==correct)option.classList.add('wrong');});
+        card.querySelector('.answer').textContent=index===correct?'✓ '+explanations[question]:'✗ '+wrongExplanations[question];
+        updateScore();
+      }));
+    });
+    $('reset-quiz').addEventListener('click',()=>{
+      answers.clear();document.querySelectorAll('.quiz-card').forEach(card=>{card.querySelectorAll('.option').forEach(btn=>{btn.disabled=false;btn.classList.remove('correct','wrong')});card.querySelector('.answer').textContent='';});updateScore();
+    });
+    convertDecimal();setColor(139,92,246);
+  </script>
+</body>
+</html>
